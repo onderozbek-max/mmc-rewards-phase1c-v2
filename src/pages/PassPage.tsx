@@ -2,11 +2,11 @@ import { Button, Heading, Modal, Page } from '@walmart/ld-kit';
 import { useMemo, useState } from 'react';
 import { Confetti } from '../components/Confetti';
 import { MilestoneTimeline } from '../components/MilestoneTimeline';
+import { ProgressBand } from '../components/ProgressBand';
 import { SiteChrome } from '../components/SiteChrome';
 import { WhatsNew } from '../components/WhatsNew';
 import {
   COPY,
-  getBandFill,
   getCelebrations,
   getMilestones,
 } from '../lib/pass';
@@ -22,27 +22,6 @@ function getProgressCopy(points: number) {
   if (points < 1000) return COPY.basicPreparing;
   if (points < 3000) return COPY.basicReached;
   return COPY.premiumReached;
-}
-
-function ProgressBand({ points }: { points: number }) {
-  const fill = Math.min(1, Math.max(0, getBandFill(points)));
-  const percent = Math.round(fill * 100);
-  return (
-    <div className="progress-band">
-      <div className="progress-track" role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={percent} aria-label={`${percent}% progress toward the next Community Pass milestone`}>
-        <span className="progress-fill" style={{ width: `${percent}%` }} />
-        <span className="progress-marker progress-marker-250" aria-hidden="true" />
-        <span className="progress-marker progress-marker-1000" aria-hidden="true" />
-        <span className="progress-marker progress-marker-3000" aria-hidden="true" />
-      </div>
-      <div className="progress-labels" aria-hidden="true">
-        <span>Start</span>
-        <span>250</span>
-        <span>1,000</span>
-        <span>3,000</span>
-      </div>
-    </div>
-  );
 }
 
 export function PassPage({ points, previous, nav }: PassPageProps) {

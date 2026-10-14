@@ -279,7 +279,9 @@ a {
   border-radius: inherit;
   display: block;
   height: 100%;
-  transition: width 300ms ease;
+  position: absolute;
+  top: 0;
+  transition: left 300ms ease, width 300ms ease;
 }
 
 .progress-marker {

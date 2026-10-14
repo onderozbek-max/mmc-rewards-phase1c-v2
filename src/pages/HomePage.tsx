@@ -1,7 +1,8 @@
 import { Card, CardContent, Heading, Page } from '@walmart/ld-kit';
 import { SiteChrome } from '../components/SiteChrome';
+import { ProgressBand, getBandProgressPercent } from '../components/ProgressBand';
 import { WhatsNew } from '../components/WhatsNew';
-import { getBandFill, getCelebrations } from '../lib/pass';
+import { getCelebrations } from '../lib/pass';
 
 type HomePageProps = {
   points: number;
@@ -30,12 +31,8 @@ function buildPassRoute(points: number, previous: number | undefined, nav: HomeP
   return `?${params.toString()}`;
 }
 
-function getProgressPercent(points: number) {
-  return Math.round(Math.min(1, Math.max(0, getBandFill(points))) * 100);
-}
-
 function HomeProgressModule({ points, previous, nav }: HomePageProps) {
-  const percent = getProgressPercent(points);
+  const percent = getBandProgressPercent(points);
   const passRoute = buildPassRoute(points, previous, nav);
   const hasNewMilestone = getCelebrations(points, previous).length > 0;
 
@@ -56,27 +53,7 @@ function HomeProgressModule({ points, previous, nav }: HomePageProps) {
           </div>
           <span className="progress-next">{points.toLocaleString()} lifetime pts</span>
         </div>
-        <div className="progress-band">
-          <div
-            className="progress-track"
-            role="progressbar"
-            aria-valuemin={0}
-            aria-valuemax={100}
-            aria-valuenow={percent}
-            aria-label={`${percent}% progress toward the next Community Pass milestone`}
-          >
-            <span className="progress-fill" style={{ width: `${percent}%` }} />
-            <span className="progress-marker progress-marker-250" aria-hidden="true" />
-            <span className="progress-marker progress-marker-1000" aria-hidden="true" />
-            <span className="progress-marker progress-marker-3000" aria-hidden="true" />
-          </div>
-          <div className="progress-labels" aria-hidden="true">
-            <span>Start</span>
-            <span>250</span>
-            <span>1,000</span>
-            <span>3,000</span>
-          </div>
-        </div>
+        <ProgressBand points={points} />
       </section>
     </a>
   );
