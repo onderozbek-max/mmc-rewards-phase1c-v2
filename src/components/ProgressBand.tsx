@@ -8,23 +8,23 @@ export function getBandProgressPercent(points: number) {
   return Math.round(Math.min(1, Math.max(0, getBandFill(points))) * 100);
 }
 
-function getVisualBand(points: number) {
+function getVisualFillWidth(points: number, fill: number) {
   if (points < 250) {
-    return { left: 0, width: MARKER_250_POSITION };
+    return fill * MARKER_250_POSITION;
   }
   if (points < 1000) {
-    return { left: MARKER_250_POSITION, width: MARKER_1000_POSITION - MARKER_250_POSITION };
+    return MARKER_250_POSITION + fill * (MARKER_1000_POSITION - MARKER_250_POSITION);
   }
   if (points < 3000) {
-    return { left: MARKER_1000_POSITION, width: TRACK_END_POSITION - MARKER_1000_POSITION };
+    return MARKER_1000_POSITION + fill * (TRACK_END_POSITION - MARKER_1000_POSITION);
   }
-  return { left: 0, width: TRACK_END_POSITION };
+  return TRACK_END_POSITION;
 }
 
 export function ProgressBand({ points }: { points: number }) {
   const fill = Math.min(1, Math.max(0, getBandFill(points)));
   const percent = getBandProgressPercent(points);
-  const visualBand = getVisualBand(points);
+  const fillWidth = getVisualFillWidth(points, fill);
 
   return (
     <div className="progress-band">
@@ -38,7 +38,7 @@ export function ProgressBand({ points }: { points: number }) {
       >
         <span
           className="progress-fill"
-          style={{ left: `${visualBand.left}%`, width: `${fill * visualBand.width}%` }}
+          style={{ left: 0, width: `${fillWidth}%` }}
         />
         <span className="progress-marker progress-marker-250" aria-hidden="true" />
         <span className="progress-marker progress-marker-1000" aria-hidden="true" />
