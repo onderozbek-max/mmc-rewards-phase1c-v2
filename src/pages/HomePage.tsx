@@ -11,17 +11,10 @@ type HomePageProps = {
 };
 
 const DEV_SCENARIOS = [
-  { label: '230 points', query: '?page=home&points=230' },
-  { label: '950 points', query: '?page=home&points=950' },
-  { label: '2,000 points', query: '?page=home&points=2000' },
-  { label: '3,200 points', query: '?page=home&points=3200' },
-  { label: 'Cross 250', query: '?page=home&points=260&previous=240' },
-  { label: 'Cross 1,000', query: '?page=home&points=1050&previous=980' },
-  { label: 'Cross 3,000', query: '?page=home&points=3050&previous=2950' },
-  { label: 'Multi-threshold jump', query: '?page=home&points=1200&previous=200' },
-  { label: 'Prime navigation', query: '?page=home&points=950&nav=prime' },
-  { label: 'Secondary navigation', query: '?page=home&points=950&nav=secondary' },
-  { label: 'Profile isolation', query: '?page=profile&points=950' },
+  { label: 'Below 250 points', query: '?page=home&points=230' },
+  { label: 'Above 250, below 1,000 points', query: '?page=home&points=950' },
+  { label: 'Above 1,000, below 3,000 points', query: '?page=home&points=2000' },
+  { label: 'Above 3,000 points', query: '?page=home&points=3200' },
 ] as const;
 
 function buildPassRoute(points: number, previous: number | undefined, nav: HomePageProps['nav']) {
@@ -99,7 +92,7 @@ function DevPanel() {
       </div>
       <Card size="small">
         <CardContent>
-          <p className="dev-panel-description">Open a scenario to review each points and navigation state.</p>
+          <p className="dev-panel-description">Open a scenario to review each points band.</p>
           <div className="dev-scenario-list">
             {DEV_SCENARIOS.map((scenario) => (
               <a key={scenario.query} href={scenario.query} className="dev-scenario-link">
