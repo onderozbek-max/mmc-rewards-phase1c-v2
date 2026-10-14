@@ -9,5 +9,6 @@ dist
 # Living Design context engine session state (dedupe ledger)
 .ld/
 
-# a11y end-hook loop transient state
-.a11y/
+# dist is committed so GitHub Pages does not need private registry access
+!dist/
+!dist/**

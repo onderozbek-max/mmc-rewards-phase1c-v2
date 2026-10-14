@@ -3,7 +3,8 @@ import react from "@vitejs/plugin-react";
 import path from "node:path";
 import fs from "node:fs";
 
-export default defineConfig({
+export default defineConfig(({ command }) => ({
+  base: command === "build" ? "/mmc-rewards-phase1c-v2/" : "/",
   server: {
     port: 3099,
   },
@@ -14,7 +15,7 @@ export default defineConfig({
     }),
     a11yReportPlugin(),
   ],
-});
+}));
 
 /**
  * Living Design a11y dev-server plugin.
