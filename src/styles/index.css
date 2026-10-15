@@ -1177,3 +1177,115 @@ a {
     border-bottom: 0;
   }
 }
+
+/* Keep the prototype feeling like a focused mobile app at every viewport. */
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  background: #e8edf2;
+}
+
+.app-shell {
+  background: var(--canvas);
+  margin: 0 auto;
+  max-width: 520px;
+  min-height: 100dvh;
+  position: relative;
+  width: 100%;
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.topbar-inner {
+  min-height: 64px;
+  padding: 0 16px;
+}
+
+.brand-mark {
+  font-size: 13px;
+  gap: 8px;
+}
+
+.brand-mark-icon {
+  height: 32px;
+  width: 32px;
+}
+
+.topbar-points {
+  background: #fff7dc;
+  border: 1px solid #f0df9d;
+  border-radius: 999px;
+  padding: 7px 10px;
+}
+
+.app-content {
+  min-height: calc(100dvh - 64px);
+}
+
+.page-container {
+  max-width: none;
+  padding: 20px 16px 34px;
+}
+
+.bottom-nav {
+  backdrop-filter: blur(14px);
+  box-shadow: 0 -6px 20px rgba(24, 35, 50, 0.08);
+}
+
+@media (min-width: 700px) {
+  #root {
+    padding: 18px 0;
+  }
+
+  .app-shell {
+    border: 1px solid #d4dce4;
+    border-radius: 28px;
+    box-shadow: 0 20px 60px rgba(24, 35, 50, 0.14);
+    min-height: calc(100dvh - 36px);
+    overflow: hidden;
+  }
+
+  .pass-hero {
+    border-radius: 20px;
+    flex-direction: column;
+    min-height: 278px;
+    padding: 26px 22px;
+  }
+
+  .point-total {
+    align-self: flex-start;
+    margin-top: 28px;
+    min-width: 0;
+    text-align: left;
+  }
+
+  .section-heading-row {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 9px;
+  }
+
+  .story-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-container {
+    max-width: none;
+  }
+
+  .bottom-nav {
+    left: 50%;
+    max-width: 520px;
+    right: auto;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
